@@ -125,6 +125,7 @@ public class Camera {
     // There's a specific order that mediaRecorder expects. Do not change the order
     // of these function calls.
     if (enableAudio) mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+    if (enableAudio) mediaRecorder.setAudioEncodingBitRate(recordingProfile.audioBitRate);
     mediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
     mediaRecorder.setOutputFormat(recordingProfile.fileFormat);
     if (enableAudio) mediaRecorder.setAudioEncoder(recordingProfile.audioCodec);
@@ -421,6 +422,7 @@ public class Camera {
   }
 
   public void startPreview() throws CameraAccessException {
+    if (pictureImageReader != null)
     createCaptureSession(CameraDevice.TEMPLATE_PREVIEW, pictureImageReader.getSurface());
   }
 
